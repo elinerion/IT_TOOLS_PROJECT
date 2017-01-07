@@ -23,15 +23,6 @@ select count(*) from datacsv;
 
 
 
-SELECT departement, max(named_struct('n', n, 'gas_label', gas_label)).n, max(named_struct('n', n, 'gas_label', gas_label)).gas_label FROM (
-  SELECT departement, gas_label, count(*) as n
-  FROM departments_year 
-  GROUP BY departement, gas_label
-) 
-GROUP BY departement;
-
-
-
 
 
 
