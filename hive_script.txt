@@ -1,0 +1,37 @@
+use default;
+show tables;
+
+CREATE TABLE IF NOT EXISTS datacsv (
+id_pos String,
+zip String,
+pop String,
+latitude int,
+longitude int,
+daate timestamp,
+gaz_id String,
+gas_label String,
+price  int)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\073';
+
+describe datacsv;
+
+LOAD DATA INPATH '/tmp/maria_dev/upload' overwrite INTO TABLE datacsv;
+
+select count(*) from datacsv;
+
+
+
+
+SELECT departement, max(named_struct('n', n, 'gas_label', gas_label)).n, max(named_struct('n', n, 'gas_label', gas_label)).gas_label FROM (
+  SELECT departement, gas_label, count(*) as n
+  FROM departments_year 
+  GROUP BY departement, gas_label
+) 
+GROUP BY departement;
+
+
+
+
+
+
